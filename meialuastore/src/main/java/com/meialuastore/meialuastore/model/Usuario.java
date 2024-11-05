@@ -1,6 +1,8 @@
 package com.meialuastore.meialuastore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +24,10 @@ public class Usuario {
 
     @Column(name = "cpf")
     private String cpf;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore // JAMAIS REMOVER, concerta problema de loop
+    private List<Pedido> pedidos;
 
     public Integer getId_usuario() {
         return id_usuario;
@@ -61,6 +67,14 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override

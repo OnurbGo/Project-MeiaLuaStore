@@ -7,7 +7,6 @@ public class ProdutoPedidoRequestDTO {
     private Integer id_produto;
     private Integer quantidade;
 
-    // Getters e Setters
     public Integer getId_produto_pedido() {
         return id_produto_pedido;
     }

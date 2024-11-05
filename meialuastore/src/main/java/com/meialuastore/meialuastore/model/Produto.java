@@ -1,6 +1,7 @@
 package com.meialuastore.meialuastore.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,9 @@ public class Produto {
 
     @Column(name = "categoria")
     private String categoria;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<ProdutoPedido> pedidos; // Relacionamento com ProdutoPedido (1:N)
 
     public Integer getId_produto() {
         return id_produto;

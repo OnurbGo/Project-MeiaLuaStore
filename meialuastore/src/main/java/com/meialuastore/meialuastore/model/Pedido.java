@@ -1,6 +1,9 @@
 package com.meialuastore.meialuastore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,16 +14,20 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_pedido;
 
-    @Column(name = "usuario_id")
-    private Integer usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonBackReference // JAMAIS REMOVER, concerta problema de loop
+    private Usuario usuario;
 
     @Column(name = "data_pedido")
-    private java.sql.Timestamp dataPedido;
+    private Timestamp dataPedido;
 
     @Column(name = "status")
     private String status;
 
-    // Getters e Setters
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private List<ProdutoPedido> produtosPedido;
+
     public Integer getId_pedido() {
         return id_pedido;
     }
@@ -29,19 +36,19 @@ public class Pedido {
         this.id_pedido = id_pedido;
     }
 
-    public Integer getUsuarioId() {
-        return usuarioId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public java.sql.Timestamp getDataPedido() {
+    public Timestamp getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(java.sql.Timestamp dataPedido) {
+    public void setDataPedido(Timestamp dataPedido) {
         this.dataPedido = dataPedido;
     }
 
@@ -51,6 +58,14 @@ public class Pedido {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<ProdutoPedido> getProdutosPedido() {
+        return produtosPedido;
+    }
+
+    public void setProdutosPedido(List<ProdutoPedido> produtosPedido) {
+        this.produtosPedido = produtosPedido;
     }
 
     @Override

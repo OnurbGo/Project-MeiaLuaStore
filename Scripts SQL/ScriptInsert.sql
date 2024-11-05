@@ -18,3 +18,5 @@ select * from produto_pedido
 select * from produto
 
 select * from usuarios
+
+select * from pedido for update;
