@@ -1,6 +1,8 @@
 package com.meialuastore.meialuastore.controller;
 
+import com.meialuastore.meialuastore.dto.ProdutoRequestDTO;
 import com.meialuastore.meialuastore.model.Produto;
+import com.meialuastore.meialuastore.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/Produtos")
+@RequestMapping("/api/produtos")
 public class ProdutoController {
 
     @Autowired
@@ -16,37 +18,36 @@ public class ProdutoController {
 
     @GetMapping
     public ResponseEntity<List<Produto>> findAll() {
-        List<Produto> produtos = this.repository.findAll();
+        List<Produto> produtos = repository.findAll();
         return ResponseEntity.ok(produtos);
     }
 
     @GetMapping("/{id}")
-    public Produto findById(@PathVariable Integer id) {
-        return this.repository.findById(id)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Produto não foi encontrado"));
+    public ResponseEntity<Produto> findById(@PathVariable Integer id) {
+        Produto produto = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Produto não foi encontrado"));
+        return ResponseEntity.ok(produto);
     }
 
     @PostMapping
-    public ResponseEntity<Produto> save(@RequestBody MovieRequestDTO dto) {
-        if (dto.nome().isEmpty()) {
-            return ResponseEntity.status(400).build();
+    public ResponseEntity<Produto> save(@RequestBody ProdutoRequestDTO dto) {
+        if (dto.nome() == null || dto.nome().isEmpty()) {
+            return ResponseEntity.badRequest().body(null);
         }
 
-        Produto movie = new Produto();
-        movie.setNome(dto.nome());
+        Produto produto = new Produto();
+        produto.setNome_produto(dto.nome());
 
-        this.repository.save(movie);
-        return ResponseEntity.ok(movie);
+        Produto savedProduto = repository.save(produto);
+        return ResponseEntity.status(201).body(savedProduto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        Produto produto = this.repository.findById(id)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Filme não foi encontrado"));
+        Produto produto = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Produto não foi encontrado"));
 
-        this.repository.delete(produto);
+        repository.delete(produto);
         return ResponseEntity.noContent().build();
     }
 }
