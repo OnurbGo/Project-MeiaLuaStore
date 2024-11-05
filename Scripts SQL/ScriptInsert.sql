@@ -7,9 +7,14 @@ VALUES
 INSERT INTO pedido (id_pedido) 
 VALUES (1);
 
-INSERT INTO produto_pedido (id_produto_pedido,quantidade,id_produto) 
-VALUES (1,2,1);
+INSERT INTO produto_pedido (id_produto_pedido,quantidade,id_produto,id_pedido) 
+VALUES (1,2,1,1);
+
+INSERT INTO usuarios (id_usuario, login, senha, nome, cpf)
+VALUES (1, 'Bruno', '1234', 'Bruno', '078.558.909-04');
 
 select * from produto_pedido
 
 select * from produto
+
+select * from usuarios

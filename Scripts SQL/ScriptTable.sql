@@ -22,25 +22,27 @@ status varchar (20),
 FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario)
 )
 
-create table pagamento(
-id_pagamento int not null primary key,
-metodo_pagamento varchar(50),
-id_pedido INT, 
-data_pagamento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-valor_pago DECIMAL(10,2),
-FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido)
-)
-
 create table forma_pagamento(
 id_forma_pagamento int not null primary key,
 metodo_forma varchar(50)
+)
+
+create table pagamento(
+id_pagamento int not null primary key,
+metodo_pagamento varchar(50),
+id_pedido INT,
+id_forma_pagamento INT,
+data_pagamento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+valor_pago DECIMAL(10,2),
+FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
+FOREIGN KEY (id_forma_pagamento) REFERENCES forma_pagamento(id_forma_pagamento)
 )
 
 create table produto(
 id_produto int not null primary key,
 nome_produto varchar(100),
 descricao_produto varchar(500),
-preco int,
+preco double,
 categoria varchar (100)
 )
 

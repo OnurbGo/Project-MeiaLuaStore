@@ -18,7 +18,7 @@ public class Produto {
     private String descricao_produto;
 
     @Column(name = "preco")
-    private Double preco;  // Alterado para Double para refletir corretamente valores decimais
+    private Double preco;
 
     @Column(name = "categoria")
     private String categoria;
