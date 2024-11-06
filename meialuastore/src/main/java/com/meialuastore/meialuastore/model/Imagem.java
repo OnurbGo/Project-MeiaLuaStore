@@ -17,7 +17,7 @@ public class Imagem {
     @JoinColumn(name = "id_produto", nullable = false)
     private Produto produto;
 
-    // Getters e Setters
+
     public Integer getId_imagem() {
         return id_imagem;
     }

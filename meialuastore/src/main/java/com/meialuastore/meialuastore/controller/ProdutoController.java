@@ -31,15 +31,27 @@ public class ProdutoController {
 
     @PostMapping
     public ResponseEntity<Produto> save(@RequestBody ProdutoRequestDTO dto) {
-        if (dto.nome() == null || dto.nome().isEmpty()) {
-            return ResponseEntity.badRequest().body(null);
+        try {
+            if (dto.getNome() == null || dto.getNome().isEmpty() ||
+                    dto.getDescricao() == null || dto.getDescricao().isEmpty() ||
+                    dto.getPreco() == null || dto.getPreco() <= 0 ||
+                    dto.getCategoria() == null || dto.getCategoria().isEmpty()) {
+
+                return ResponseEntity.badRequest().build();
+            }
+
+            Produto produto = new Produto();
+            produto.setNome_produto(dto.getNome());
+            produto.setDescricao_produto(dto.getDescricao());
+            produto.setPreco(dto.getPreco());
+            produto.setCategoria(dto.getCategoria());
+
+            Produto savedProduto = repository.save(produto);
+            return ResponseEntity.status(201).body(savedProduto);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
         }
-
-        Produto produto = new Produto();
-        produto.setNome_produto(dto.nome());
-
-        Produto savedProduto = repository.save(produto);
-        return ResponseEntity.status(201).body(savedProduto);
     }
 
     @DeleteMapping("/{id}")
@@ -47,7 +59,8 @@ public class ProdutoController {
         Produto produto = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Produto não foi encontrado"));
 
-        repository.delete(produto);
+        this.repository.delete(produto);
         return ResponseEntity.noContent().build();
     }
+
 }

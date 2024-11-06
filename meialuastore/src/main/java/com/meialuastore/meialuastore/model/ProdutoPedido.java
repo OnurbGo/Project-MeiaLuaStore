@@ -11,11 +11,11 @@ public class ProdutoPedido {
     private Integer id_produto_pedido;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id", nullable = false)
+    @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id", nullable = false)
+    @JoinColumn(name = "id_produto", nullable = false)
     private Produto produto;
 
     private Integer quantidade;

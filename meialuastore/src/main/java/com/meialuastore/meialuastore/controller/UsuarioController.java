@@ -39,8 +39,8 @@ public class UsuarioController {
         return repository.findById(id)
                 .map(usuario -> {
                     repository.delete(usuario);
-                    return ResponseEntity.noContent().build(); // Retorna 204 No Content
+                    return ResponseEntity.noContent().build();
                 })
-                .orElse(ResponseEntity.notFound().build()); // Retorna 404 Not Found
+                .orElse(ResponseEntity.notFound().build());
     }
 }

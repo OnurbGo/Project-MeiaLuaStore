@@ -72,7 +72,6 @@ public class ProdutoPedidoController {
         ProdutoPedido produtoPedido = new ProdutoPedido();
         produtoPedido.setId_produto_pedido(dto.getId_produto_pedido());
 
-        // buscar pedido e produto pelo ID
         Pedido pedido = pedidoRepository.findById(dto.getId_pedido())
                 .orElseThrow(() -> new IllegalArgumentException("Pedido não encontrado: " + dto.getId_pedido()));
         Produto produto = produtoRepository.findById(dto.getId_produto())
