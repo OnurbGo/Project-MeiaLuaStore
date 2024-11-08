@@ -12,7 +12,6 @@ VALUES ('APROVADO',1,2);
 INSERT INTO produto_pedido (id_produto, id_pedido) 
 VALUES (1,1);
 
-
 select * from produto_pedido
 
 select * from produto
