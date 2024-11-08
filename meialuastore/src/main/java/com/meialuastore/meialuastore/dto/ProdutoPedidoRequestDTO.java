@@ -1,19 +1,12 @@
 package com.meialuastore.meialuastore.dto;
 
+import java.util.Objects;
+
 public class ProdutoPedidoRequestDTO {
 
-    private Integer id_produto_pedido;
+
     private Integer id_pedido;
     private Integer id_produto;
-    private Integer quantidade;
-
-    public Integer getId_produto_pedido() {
-        return id_produto_pedido;
-    }
-
-    public void setId_produto_pedido(Integer id_produto_pedido) {
-        this.id_produto_pedido = id_produto_pedido;
-    }
 
     public Integer getId_pedido() {
         return id_pedido;
@@ -31,11 +24,17 @@ public class ProdutoPedidoRequestDTO {
         this.id_produto = id_produto;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProdutoPedidoRequestDTO that = (ProdutoPedidoRequestDTO) o;
+        return Objects.equals(id_pedido, that.id_pedido) &&
+                Objects.equals(id_produto, that.id_produto);
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_pedido, id_produto);
     }
 }

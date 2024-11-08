@@ -2,11 +2,15 @@ package com.meialuastore.meialuastore.controller;
 
 import com.meialuastore.meialuastore.dto.ImagemRequestDTO;
 import com.meialuastore.meialuastore.model.Imagem;
+import com.meialuastore.meialuastore.model.Produto;
 import com.meialuastore.meialuastore.repository.ImagemRepository;
+import com.meialuastore.meialuastore.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -16,7 +20,9 @@ public class ImagemController {
     @Autowired
     private ImagemRepository imagemRepository;
 
-    // Endpoint para listar todas as imagens
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
     @GetMapping
     public List<ImagemRequestDTO> listarImagens() {
         return imagemRepository.findAll().stream()
@@ -25,18 +31,63 @@ public class ImagemController {
     }
 
     @GetMapping("/produto/{id_produto}")
-    public List<ImagemRequestDTO> listarImagensPorProduto(@PathVariable Integer id_produto) {
-        return imagemRepository.findAll().stream()
-                .filter(imagem -> imagem.getProduto().getId_produto().equals(id_produto))
+    public ResponseEntity<List<ImagemRequestDTO>> listarImagensPorProduto(@PathVariable Integer id_produto) {
+        List<Imagem> imagens = imagemRepository.findByProduto_Id_produto(id_produto);
+
+        if (imagens.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<ImagemRequestDTO> imagemDTOs = imagens.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+        return ResponseEntity.ok(imagemDTOs);
     }
 
     private ImagemRequestDTO convertToDTO(Imagem imagem) {
         ImagemRequestDTO dto = new ImagemRequestDTO();
-        dto.setId_imagem(imagem.getId_imagem());
         dto.setUrl(imagem.getUrl());
-        dto.setId_produto(imagem.getProduto().getId_produto());
+
+        if (imagem.getProduto() != null) {
+            dto.setId_produto(imagem.getProduto().getId_produto());
+        } else {
+            dto.setId_produto(null);
+        }
+
         return dto;
     }
+
+    @PostMapping
+    public ResponseEntity<?> criarImagem(@RequestBody ImagemRequestDTO imagemRequestDTO) {
+        // Validação produto
+        Optional<Produto> produtoOpt = produtoRepository.findById(imagemRequestDTO.getId_produto());
+        if (produtoOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Produto não encontrado com o ID fornecido.");
+        }
+
+        // Log para debug
+        System.out.println("Produto encontrado: " + produtoOpt.get());
+
+        // new Imagem
+        Imagem imagem = new Imagem();
+        imagem.setUrl(imagemRequestDTO.getUrl());
+        imagem.setProduto(produtoOpt.get());
+
+        // Save
+        Imagem imagemSalva = imagemRepository.save(imagem);
+        return ResponseEntity.ok(imagemSalva);
+    }
+
+    @DeleteMapping("/{id_imagens}")
+    public ResponseEntity<?> excluirImagem(@PathVariable Integer id_imagens) {
+        Optional<Imagem> imagemOpt = imagemRepository.findById(id_imagens);
+        if (imagemOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Excluir imagem
+        imagemRepository.delete(imagemOpt.get());
+        return ResponseEntity.noContent().build();
+    }
+
 }

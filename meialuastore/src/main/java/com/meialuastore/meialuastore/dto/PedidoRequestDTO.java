@@ -3,20 +3,10 @@ package com.meialuastore.meialuastore.dto;
 import java.sql.Timestamp;
 
 public class PedidoRequestDTO {
-
-    private Integer id_pedido;
     private Integer usuarioId;
     private Timestamp dataPedido;
     private String status;
-
-
-    public Integer getId_pedido() {
-        return id_pedido;
-    }
-
-    public void setId_pedido(Integer id_pedido) {
-        this.id_pedido = id_pedido;
-    }
+    private Integer quantidade;
 
     public Integer getUsuarioId() {
         return usuarioId;
@@ -40,5 +30,13 @@ public class PedidoRequestDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 }

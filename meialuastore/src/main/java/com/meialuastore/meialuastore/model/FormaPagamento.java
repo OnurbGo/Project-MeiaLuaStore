@@ -16,6 +16,10 @@ public class FormaPagamento {
     @OneToMany(mappedBy = "formaPagamento")
     private List<Pagamento> pagamentos;
 
+    public int getIdFormaPagamento() {
+        return idFormaPagamento;
+    }
+
     public void setIdFormaPagamento(int idFormaPagamento) {
         this.idFormaPagamento = idFormaPagamento;
     }
@@ -28,3 +32,4 @@ public class FormaPagamento {
         this.metodoForma = metodoForma;
     }
 }
+

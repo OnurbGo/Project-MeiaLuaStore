@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -63,4 +64,14 @@ public class ProdutoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id_produto}/preco")
+    public String atualizarPrecoProduto(@PathVariable Integer id_produto, @RequestParam Double novoPreco) {
+        Produto produto = repository.findById(id_produto)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        produto.setPreco(novoPreco);
+        repository.save(produto); // ativa o trigger do banco
+
+        return null;
+    }
 }

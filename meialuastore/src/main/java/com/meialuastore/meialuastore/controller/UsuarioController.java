@@ -1,5 +1,6 @@
 package com.meialuastore.meialuastore.controller;
 
+import com.meialuastore.meialuastore.dto.UsuarioRequestDTO;
 import com.meialuastore.meialuastore.model.Usuario;
 import com.meialuastore.meialuastore.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,15 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> save(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        // Converte o DTO para o modelo Usuario
+        Usuario usuario = new Usuario();
+        usuario.setLogin(usuarioRequestDTO.getLogin());
+        usuario.setSenha(usuarioRequestDTO.getSenha());
+        usuario.setNome(usuarioRequestDTO.getNome());
+        usuario.setCpf(usuarioRequestDTO.getCpf());
+
+        // Salva o usuário e retorna o usuário salvo
         Usuario savedUsuario = repository.save(usuario);
         return ResponseEntity.ok(savedUsuario);
     }

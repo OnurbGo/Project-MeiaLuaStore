@@ -13,16 +13,3 @@ BEGIN
 END $$
 
 DELIMITER ;
-
-
-UPDATE produto
-SET preco = 280.50
-WHERE id_produto = 1;
-
-UPDATE produto
-SET preco = 251.50
-WHERE id_produto = 2;
-
-select * from produto p for update;
-
-select * from aditoria_preco_item api 

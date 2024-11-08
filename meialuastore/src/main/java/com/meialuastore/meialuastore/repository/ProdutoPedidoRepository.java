@@ -1,10 +1,15 @@
 package com.meialuastore.meialuastore.repository;
 
 import com.meialuastore.meialuastore.model.ProdutoPedido;
+import com.meialuastore.meialuastore.model.ProdutoPedidoId;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-@Repository
-public interface ProdutoPedidoRepository extends JpaRepository<ProdutoPedido, Integer> {
-    // Você pode adicionar métodos personalizados aqui, se necessário
+import java.util.Optional;
+
+public interface ProdutoPedidoRepository extends JpaRepository<ProdutoPedido, ProdutoPedidoId> {
+
+    @Query("SELECT pp FROM ProdutoPedido pp WHERE pp.pedido.id_pedido = :idPedido AND pp.produto.id_produto = :idProduto")
+    Optional<ProdutoPedido> findByPedidoIdAndProdutoId(@Param("idPedido") Integer idPedido, @Param("idProduto") Integer idProduto);
 }

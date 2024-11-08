@@ -2,31 +2,22 @@ package com.meialuastore.meialuastore.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "produto_pedido")
+@IdClass(ProdutoPedidoId.class)
 public class ProdutoPedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_produto_pedido;
-
     @ManyToOne
-    @JoinColumn(name = "id_pedido", nullable = false)
+    @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido", insertable = false, updatable = false)
     private Pedido pedido;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "id_produto", nullable = false)
+    @JoinColumn(name = "id_produto", referencedColumnName = "id_produto", insertable = false, updatable = false)
     private Produto produto;
-
-    private Integer quantidade;
-
-    public Integer getId_produto_pedido() {
-        return id_produto_pedido;
-    }
-
-    public void setId_produto_pedido(Integer id_produto_pedido) {
-        this.id_produto_pedido = id_produto_pedido;
-    }
 
     public Pedido getPedido() {
         return pedido;
@@ -44,11 +35,16 @@ public class ProdutoPedido {
         this.produto = produto;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProdutoPedido that = (ProdutoPedido) o;
+        return pedido.equals(that.pedido) && produto.equals(that.produto);
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
+    @Override
+    public int hashCode() {
+        return Objects.hash(pedido, produto);
     }
 }

@@ -8,22 +8,22 @@ public class Imagem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_imagem;
+    @Column(name = "id_imagens")
+    private Integer id_imagens;
 
     @Column(name = "url", columnDefinition = "longtext", nullable = false)
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "id_produto", nullable = false)
+    @JoinColumn(name = "id_produto", referencedColumnName = "id_produto")
     private Produto produto;
 
-
-    public Integer getId_imagem() {
-        return id_imagem;
+    public Integer getId_imagens() {
+        return id_imagens;
     }
 
-    public void setId_imagem(Integer id_imagem) {
-        this.id_imagem = id_imagem;
+    public void setId_imagens(Integer id_imagens) {
+        this.id_imagens = id_imagens;
     }
 
     public String getUrl() {
@@ -42,3 +42,4 @@ public class Imagem {
         this.produto = produto;
     }
 }
+

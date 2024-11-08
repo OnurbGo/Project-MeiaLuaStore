@@ -19,37 +19,35 @@ public class ProdutoRequestDTO {
     @NotBlank(message = "A categoria do produto é obrigatória.")
     private String categoria;
 
-    // Getters e Setters
-
-    public String getNome() {
+    public @NotBlank(message = "O nome do produto é obrigatório.") String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(@NotBlank(message = "O nome do produto é obrigatório.") String nome) {
         this.nome = nome;
     }
 
-    public String getDescricao() {
+    public @NotBlank(message = "A descrição do produto é obrigatória.") String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(@NotBlank(message = "A descrição do produto é obrigatória.") String descricao) {
         this.descricao = descricao;
     }
 
-    public Double getPreco() {
+    public @NotNull(message = "O preço do produto é obrigatório.") @Positive(message = "O preço deve ser maior que zero.") Double getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(@NotNull(message = "O preço do produto é obrigatório.") @Positive(message = "O preço deve ser maior que zero.") Double preco) {
         this.preco = preco;
     }
 
-    public String getCategoria() {
+    public @NotBlank(message = "A categoria do produto é obrigatória.") String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(@NotBlank(message = "A categoria do produto é obrigatória.") String categoria) {
         this.categoria = categoria;
     }
 }

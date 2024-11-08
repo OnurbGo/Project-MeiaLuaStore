@@ -1,6 +1,9 @@
 package com.meialuastore.meialuastore.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -8,6 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "pedido")
+@JsonIgnoreProperties(value = { "usuario.login", "usuario.senha", "usuario.nome", "usuario.cpf" }) // Ignora campos desnecessários
 public class Pedido {
 
     @Id
@@ -16,7 +20,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    @JsonBackReference // JAMAIS REMOVER, concerta problema de loop
+    @JsonBackReference // JAMAIS REMOVER, resolve problema de loop
     private Usuario usuario;
 
     @Column(name = "data_pedido")
@@ -26,7 +30,11 @@ public class Pedido {
     private String status;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ProdutoPedido> produtosPedido;
+
+    @Column(name = "quantidade")
+    private Integer quantidade;
 
     public Integer getId_pedido() {
         return id_pedido;
@@ -38,6 +46,11 @@ public class Pedido {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    @JsonProperty("usuario")  // Exibe apenas o id_usuario
+    public Integer getUsuarioId() {
+        return usuario != null ? usuario.getId_usuario() : null;  // Exibe o id_usuario
     }
 
     public void setUsuario(Usuario usuario) {
@@ -66,6 +79,14 @@ public class Pedido {
 
     public void setProdutosPedido(List<ProdutoPedido> produtosPedido) {
         this.produtosPedido = produtosPedido;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
     @Override

@@ -26,27 +26,4 @@ public class FormaPagamentoController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
-    @PostMapping
-    public FormaPagamento create(@RequestBody FormaPagamento formaPagamento) {
-        return formaPagamentoRepository.save(formaPagamento);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<FormaPagamento> update(@PathVariable int id, @RequestBody FormaPagamento formaPagamento) {
-        return formaPagamentoRepository.findById(id).map(existingFormaPagamento -> {
-            existingFormaPagamento.setMetodoForma(formaPagamento.getMetodoForma());
-            return ResponseEntity.ok(formaPagamentoRepository.save(existingFormaPagamento));
-        }).orElse(ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable int id) {
-        if (formaPagamentoRepository.existsById(id)) {
-            formaPagamentoRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }

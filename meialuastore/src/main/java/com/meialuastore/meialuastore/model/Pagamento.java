@@ -1,5 +1,6 @@
 package com.meialuastore.meialuastore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -14,10 +15,12 @@ public class Pagamento {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido")
+    @JsonBackReference
     private Pedido pedido;
 
     @ManyToOne
     @JoinColumn(name = "id_forma_pagamento")
+    @JsonBackReference
     private FormaPagamento formaPagamento;
 
     private LocalDateTime dataPagamento;
