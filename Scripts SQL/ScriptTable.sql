@@ -76,5 +76,3 @@ select * from imagens
 SELECT * FROM pedido WHERE id_pedido = 3;
 DELETE FROM imagens WHERE id_imagens = 2;
 
-
-
