@@ -28,7 +28,7 @@
     // Verifica se o formulário foi enviado
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // URL do backend Java para criação de produto
-        $url = 'http://localhost:8080/api/produtos';
+        $link = 'http://localhost:8080/api/produtos';
 
         // Obtém os dados do produto do formulário
         $nome = $_POST['nome'];
@@ -51,7 +51,7 @@
         $ch = curl_init();
 
         // Configurações da requisição POST
-        curl_setopt($ch, CURLOPT_URL, $url); // URL da requisição
+        curl_setopt($ch, CURLOPT_URL, $link); // URL da requisição
         curl_setopt($ch, CURLOPT_POST, true); // Define o método como POST
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Retorna a resposta como string
         curl_setopt($ch, CURLOPT_TIMEOUT, 30); // Timeout de 30 segundos (opcional)

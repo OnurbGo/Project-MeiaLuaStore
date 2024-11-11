@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Usuario</title>
+    <title>Cadastro de Pedidos</title>
 </head>
 <body>
 
-    <h1>Cadastro de Usuario</h1>
+    <h1>Cadastro de Pedidos</h1>
     <form action="" method="POST">
-        <label for="login">Nome de login:</label>
-        <input type="text" id="login" name="login" required>
+        <label for="usuarioId">ID Usuario:</label>
+        <input type="number" id="usuarioId" name="usuarioId" required>
         
-        <label for="senha">Senha:</label>
-        <input type="text" id="senha" name="senha" required>
+        <label for="dataPedido">Data Pedido:</label>
+        <input type="datetime-local" id="dataPedido" name="dataPedido" required>
 
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required>
 
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" required>
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" required>
 
-        <button type="submit">Enviar Usuario</button>
+        <button type="submit">Enviar Pagamento</button>
     </form>
 
     <?php
     // Verifica se o formulário foi enviado
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // URL do backend Java para criação de produto
-        $link = 'http://localhost:8080/api/usuarios';
+        $link = 'http://localhost:8080/api/pedidos';
 
         // Obtém os dados do produto do formulário
-        $login = $_POST['login'];
-        $senha = $_POST['senha'];
-        $nome = $_POST['nome'];
-        $cpf = $_POST['cpf'];
+        $usuarioId = $_POST['usuarioId'];
+        $dataPedido = $_POST['dataPedido'];
+        $status = $_POST['status'];
+        $quantidade = $_POST['quantidade'];
 
         // Cria o array com os dados do produto
         $dadosProduto = [
-            'login' => $login,
-            'senha' => $senha,
-            'nome' => $nome,
-            'cpf' => $cpf
+            'usuarioId' => $usuarioId,
+            'dataPedido' => $dataPedido,
+            'status' => $status,
+            'quantidade' => $quantidade
         ];
 
         // Converte os dados para JSON

@@ -4,13 +4,13 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];  // Pega o ID a partir do parâmetro GET na URL
 
     // URL do backend Java, incluindo o ID para exclusão
-    $url = "http://localhost:8080/pagamento/$id";
+    $link = "http://localhost:8080/pagamento/$id";
 
     // Inicia a sessão cURL
     $ch = curl_init();
 
     // Configurações da requisição DELETE
-    curl_setopt($ch, CURLOPT_URL, $url); // URL da requisição com o ID do item a ser excluído
+    curl_setopt($ch, CURLOPT_URL, $link); // URL da requisição com o ID do item a ser excluído
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); // Define o método como DELETE
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Retorna a resposta como string
     curl_setopt($ch, CURLOPT_TIMEOUT, 30); // Timeout de 30 segundos (opcional)

@@ -3,45 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Usuario</title>
+    <title>Cadastro de Imagens</title>
 </head>
 <body>
 
-    <h1>Cadastro de Usuario</h1>
+    <h1>Cadastro de Imagens</h1>
     <form action="" method="POST">
-        <label for="login">Nome de login:</label>
-        <input type="text" id="login" name="login" required>
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url" required>
         
-        <label for="senha">Senha:</label>
-        <input type="text" id="senha" name="senha" required>
+        <label for="id_produto">ID do produto:</label>
+        <input type="number" id="id_produto" name="id_produto" required>
 
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
-
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" required>
-
-        <button type="submit">Enviar Usuario</button>
+        <button type="submit">Enviar imagens</button>
     </form>
 
     <?php
     // Verifica se o formulário foi enviado
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // URL do backend Java para criação de produto
-        $link = 'http://localhost:8080/api/usuarios';
+        $link = 'http://localhost:8080/imagens';
 
         // Obtém os dados do produto do formulário
-        $login = $_POST['login'];
-        $senha = $_POST['senha'];
-        $nome = $_POST['nome'];
-        $cpf = $_POST['cpf'];
+        $url = $_POST['url'];
+        $id_produto = $_POST['id_produto'];
 
         // Cria o array com os dados do produto
         $dadosProduto = [
-            'login' => $login,
-            'senha' => $senha,
-            'nome' => $nome,
-            'cpf' => $cpf
+            'url' => $url,
+            'id_produto' => $id_produto
         ];
 
         // Converte os dados para JSON

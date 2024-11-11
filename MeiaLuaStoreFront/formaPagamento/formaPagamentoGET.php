@@ -1,14 +1,12 @@
 <?php
-// URL do backend Java
-$url = 'http://localhost:8080/forma-pagamento';
+$link = 'http://localhost:8080/forma-pagamento';
 
 // Inicia a sessão cURL
 $ch = curl_init();
 
 // Configurações da requisição GET
-curl_setopt($ch, CURLOPT_URL, $url); // URL da requisição
+curl_setopt($ch, CURLOPT_URL, $link); // URL da requisição
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Retorna a resposta como string
-curl_setopt($ch, CURLOPT_TIMEOUT, 30); // Timeout de 30 segundos (opcional)
 
 // Executa a requisição e pega a resposta
 $response = curl_exec($ch);
