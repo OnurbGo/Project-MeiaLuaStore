@@ -18,7 +18,7 @@ if(curl_errno($ch)) {
     echo 'Erro cURL: ' . curl_error($ch);
 } else {
     // Exibe a resposta do backend Java
-    echo 'Resposta do backend Java: ' . $response;
+    echo $response;
 }
 
 // Fecha a sessão cURL
