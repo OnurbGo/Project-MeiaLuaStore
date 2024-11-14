@@ -72,7 +72,8 @@ FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
 )
 
 
-select * from imagens 
+select * from imagens for update;
 SELECT * FROM pedido WHERE id_pedido = 3;
 DELETE FROM imagens WHERE id_imagens = 2;
+
 

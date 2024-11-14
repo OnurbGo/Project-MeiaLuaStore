@@ -16,6 +16,12 @@ VALUES ('APROVADO',1,2);
 INSERT INTO pedido (status, usuario_id, quantidade) 
 VALUES ('APROVADO',1,20);
 
+INSERT INTO pedido (status, usuario_id, quantidade) 
+VALUES ('APROVADO',6,30);
+
+INSERT INTO produto_pedido (id_produto, id_pedido) 
+VALUES (6,7);
+
 INSERT INTO produto_pedido (id_produto, id_pedido) 
 VALUES (3,4);
 

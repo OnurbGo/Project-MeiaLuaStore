@@ -24,10 +24,10 @@
     <img class="logo-centro" src="Imagens/nome_meia_lua_store.jpg" alt="Meia Lua Store">
   </div>
 
-  <p class="textocentro">Este site é uma biblioteca online de jogos gratuitos, nosso intuito é conceder uma esperiencia
-    agradavel<br> para aqueles que querem apenas desfrutar de pequenas sessões de jogatinas.</p>
+  <p class="textocentro">Este site é uma loja de jogos, apesar de vendermos jogos de varios generos
+    <br> Temos foco em jogos de luta.</p>
   <br>
-  <p class="textocentro">Temos atualmente 4 jogos em nossa biblioteca e possuimos 6 membros ativos.</p>
+  <p class="textocentro">Temos uma grande variedade de jogos a sua disposição.</p>
   <br><br><br><br>
     
   <div class="conteiner-centro">
@@ -35,8 +35,7 @@
   </div>
 
   <br><br><br><br>
-  <p class="textocentro">Aqui você vai encontrar diversos jogos de gêneros diferentes,
-  <br>Priorizamos a sua experiencia e praticidade, então boa jogatina Campeão.</p>
+  <p class="textocentro">Aqui você vai encontrar o seu descanso tão merecido, então boa jogatina Campeão.</p>
   <br>
 
   <br><br><br><br><br><br>

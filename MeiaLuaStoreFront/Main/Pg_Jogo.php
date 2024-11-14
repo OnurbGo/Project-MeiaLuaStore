@@ -1,50 +1,75 @@
 <?php
+// Função para buscar os dados do produto usando a API do backend Java
+function buscarProduto($id_produto) {
+    $url = "http://localhost:8080/api/produtos/$id_produto"; // URL da API REST do produto
+    $ch = curl_init($url);
+
+    // Configuração da requisição cURL
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPGET, true);
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo 'Erro cURL: ' . curl_error($ch);
+        curl_close($ch);
+        return null;
+    }
+
+    curl_close($ch);
+
+    // Converter resposta JSON para array PHP
+    return json_decode($response, true);
+}
+
+// Função para buscar as imagens do produto usando a API do backend Java
+function buscarImagens($id_produto) {
+    $url = "http://localhost:8080/imagens/produto/$id_produto"; // URL da API REST de imagens
+    $ch = curl_init($url);
+
+    // Configuração da requisição cURL
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPGET, true);
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo 'Erro cURL: ' . curl_error($ch);
+        curl_close($ch);
+        return null;
+    }
+
+    curl_close($ch);
+
+    // Converter resposta JSON para array PHP
+    return json_decode($response, true);
+}
+
 if (isset($_GET['id'])) {
     $produtoId = $_GET['id'];
 
-    // Conexão com o banco de dados
-    $host = "localhost";
-    $dbname = "meialuastore";
-    $user = "root";          
-    $password = "";            
-
-    $conn = new mysqli($host, $user, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Falha na conexão: " . $conn->connect_error);
-    }
-
-    $sql_produto = "SELECT * FROM produto WHERE id_produto = ?";
-    $stmt = $conn->prepare($sql_produto);
-    $stmt->bind_param("i", $produtoId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $produto = $result->fetch_assoc();
-        $nome_produto = htmlspecialchars($produto['nome_produto']);
-        $descricao_produto = nl2br(htmlspecialchars($produto['descricao_produto']));
-        $categoria = htmlspecialchars($produto['categoria']);
-        $preco = number_format($produto['preco'], 2, ',', '.');
-
-        $sql_imagem = "SELECT url FROM imagens WHERE id_produto = ?";
-        $stmt_imagem = $conn->prepare($sql_imagem);
-        $stmt_imagem->bind_param("i", $produtoId);
-        $stmt_imagem->execute();
-        $result_imagem = $stmt_imagem->get_result();
-
-        if ($result_imagem->num_rows > 0) {
-            $imagem = $result_imagem->fetch_assoc();
-            $url_imagem = $imagem['url'];
-        } else {
-            $url_imagem = 'default.jpg';
-        }
-    } else {
+    // Buscar dados do produto
+    $produto = buscarProduto($produtoId);
+    if (!$produto) {
         echo "Produto não encontrado.";
         exit;
     }
 
-    $conn->close();
+    $nome_produto = htmlspecialchars($produto['nome_produto']);
+    $descricao_produto = nl2br(htmlspecialchars($produto['descricao_produto']));
+    $categoria = htmlspecialchars($produto['categoria']);
+    $preco = number_format($produto['preco'], 2, ',', '.');
+
+    // Buscar imagens do produto
+    $imagens = buscarImagens($produtoId);
+    if ($imagens && count($imagens) > 0) {
+        $url_imagem = $imagens[0]['url'];  // Pega a primeira imagem
+    } else {
+        $url_imagem = 'default.jpg';  // Imagem padrão caso não haja imagens
+    }
+} else {
+    echo "Produto não encontrado.";
+    exit;
 }
 ?>
 

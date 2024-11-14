@@ -24,7 +24,7 @@
       <ul>
         <li><a href="index.php?pg=home" title="Home">Home</a></li>
         <li><a href="index.php?pg=loja" title="Loja">Loja</a></li>
-        <li><a href="index.php?pg=contato" title="Contato">Contato</a></li>
+        <li><a href="index.php?pg=usuario" title="Usuario">Usuario</a></li>
         <li><a href="index.php?pg=equipe" title="Equipe">Equipe</a></li>
       </ul>
     </nav>

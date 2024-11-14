@@ -28,3 +28,4 @@ DELETE FROM forma_pagamento WHERE id_forma_pagamento = 1;
 select * from aditoria_preco_item
 
 select * from pagamento ;
+

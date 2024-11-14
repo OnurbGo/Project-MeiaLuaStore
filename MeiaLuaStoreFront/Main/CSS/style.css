@@ -1,38 +1,48 @@
 * {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+}
 
 .header {
   background: #000000;
   color: #a1a1a1;
-  padding: 20px; }
-  .header .header-logo img {
-    width: 20%;
-    height: 100%; }
+  padding: 20px;
+}
+.header .header-logo img {
+  width: 20%;
+  height: 100%;
+}
 
 .header-nav {
-  float: right; }
-  .header-nav ul {
-    list-style: none; }
-    .header-nav ul li {
-      display: inline-block;
-      margin: 20px; }
-      .header-nav ul li a {
-        color: #a1a1a1;
-        text-decoration: none;
-        font: 120% Oswald, tahoma;
-        font-weight: bold;
-        text-transform: uppercase; }
-        .header-nav ul li a:hover {
-          color: #ff0000; }
+  float: right;
+}
+.header-nav ul {
+  list-style: none;
+}
+.header-nav ul li {
+  display: inline-block;
+  margin: 20px;
+}
+.header-nav ul li a {
+  color: #a1a1a1;
+  text-decoration: none;
+  font: 120% Oswald, tahoma;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.header-nav ul li a:hover {
+  color: #ff0000;
+}
 
 .header {
-  border-bottom: 3px solid #ff0000; }
+  border-bottom: 3px solid #ff0000;
+}
 
 .video {
   width: 100%;
   height: 1%;
-  border-bottom: 3px solid #ff0000; }
+  border-bottom: 3px solid #ff0000;
+}
 
 .footer {
   position: relative;
@@ -43,7 +53,8 @@
   width: 100%;
   color: #ffffff;
   text-align: center;
-  font: 20px Oswald, tahoma; }
+  font: 20px Oswald, tahoma;
+}
 
 .fixo {
   position: fixed;
@@ -54,52 +65,62 @@
   width: 100%;
   color: #ffffff;
   text-align: center;
-  font: 20px Oswald, tahoma; }
+  font: 20px Oswald, tahoma;
+}
 
 container {
   width: 1000px;
-  margin: auto; }
+  margin: auto;
+}
 
 .flex {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; }
-  .flex .flex-coluna {
-    width: 30%;
-    margin: 20px;
-    padding: 20px;
-    box-shadow: 0 0 20px #a1a1a1;
-    text-align: center;
-    font: 20px tahoma, verdana; }
-    .flex .flex-coluna img {
-      max-width: 100%;
-      max-height: 100%; }
+  justify-content: center;
+}
+.flex .flex-coluna {
+  width: 30%;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 20px #a1a1a1;
+  text-align: center;
+  font: 20px tahoma, verdana;
+}
+.flex .flex-coluna img {
+  max-width: 100%;
+  max-height: 100%;
+}
 
 h1 {
   font: 30px Oswald, tahoma;
   text-align: center;
   font-weight: bold;
-  margin: 20px; }
+  margin: 20px;
+}
 
 .logocybertech {
   height: 8%;
-  width: 8%; }
+  width: 8%;
+}
 
 .logo {
   max-height: 15%;
   max-width: 15%;
-  padding: 0; }
+  padding: 0;
+}
 
 .logo-centro {
   max-height: 40%;
   max-width: 40%;
-  padding: 0; }
+  padding: 0;
+}
 
 .banner {
   width: 100%;
   max-height: 10%;
   height: auto;
-  border-bottom: 3px solid red; }
+  border-bottom: 3px solid red;
+}
 
 .capa {
   max-width: 30%;
@@ -107,25 +128,29 @@ h1 {
   align-items: left;
   box-shadow: 0 0 20px #a1a1a1;
   margin-left: 3%;
-  margin-right: 3%; }
+  margin-right: 3%;
+}
 
 .conteiner-capa {
   padding-left: 3%;
   padding-right: 3%;
   font-family: tahoma, verdana;
   text-align: left;
-  display: flex; }
+  display: flex;
+}
 
 .textocentro {
   text-align: center;
-  font: 100% tahoma, verdana; }
+  font: 100% tahoma, verdana;
+}
 
 .centro {
   width: 100%;
   margin: auto;
   align-items: center;
   text-align: center;
-  font-family: tahoma, verdana; }
+  font-family: tahoma, verdana;
+}
 
 input,
 textarea {
@@ -135,12 +160,14 @@ textarea {
   border: 1px solid #000000;
   padding: 10px;
   box-sizing: border-box;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+}
 
 label {
   font-weight: bold;
   margin-bottom: 10px;
-  display: block; }
+  display: block;
+}
 
 button {
   background: #a1a1a1;
@@ -149,85 +176,113 @@ button {
   margin-top: 10px;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.5s; }
+  transition: background 0.5s;
+}
 
 button:hover,
 button:focus {
-  background: red; }
+  background: red;
+}
 
 .flexp {
   background: #ffdbdb;
   padding: 15px;
-  margin: 0px; }
+  margin: 0px;
+}
 
 .textoflex {
   color: #000000;
   font-family: tahoma, verdana;
-  text-decoration: none; }
-  .textoflex:hover {
-    color: #5b0000; }
+  text-decoration: none;
+}
+.textoflex:hover {
+  color: #5b0000;
+}
 
 .p {
   font: 15px tahoma, verdana;
   text-align: center;
-  margin: 20px; }
+  margin: 20px;
+}
 
 .gif-alex {
   height: 10%;
-  width: 10%; }
+  width: 10%;
+}
 
 .gif-agradecimento {
   max-width: 50%;
   max-height: 50%;
   height: auto;
-  width: auto; }
+  width: auto;
+}
 
 .conteiner-centro {
   font-family: tahoma, verdana;
   text-align: center;
   align-items: center;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+}
 
 .jogocentro {
   align-items: center;
   margin: auto;
-  text-align: center; }
+  text-align: center;
+}
 
 .centroiframe {
   justify-content: center;
   align-items: center;
   margin: auto;
-  text-align: center; }
+  text-align: center;
+}
 
 .botao {
   font-family: Oswald, tahoma;
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 .botao-jogo {
   font-family: Oswald, tahoma;
-  font-weight: bold; }
+  font-weight: bold;
+}
+
+.carousel-inner img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+.carousel-inner {
+  width: 100%;
+  height: 600px;
+}
 
 @media (max-width: 486px) {
   .header-nav ul {
-    list-style: none; }
-    .header-nav ul li {
-      display: inline-block;
-      text-align: center;
-      align-items: center;
-      margin: auto; }
-      .header-nav ul li a {
-        color: #a1a1a1;
-        text-decoration: none;
-        font: 100% Oswald, tahoma;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-left: 5px;
-        margin-right: 5px;
-        margin-top: auto;
-        margin-bottom: auto; }
-        .header-nav ul li a:hover {
-          color: #ff0000; }
+    list-style: none;
+  }
+  .header-nav ul li {
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+  }
+  .header-nav ul li a {
+    color: #a1a1a1;
+    text-decoration: none;
+    font: 100% Oswald, tahoma;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .header-nav ul li a:hover {
+    color: #ff0000;
+  }
 
   .footer {
     position: fixed;
@@ -239,50 +294,62 @@ button:focus {
     width: 100%;
     color: #ffffff;
     text-align: center;
-    font: 20px Oswald, tahoma; }
+    font: 20px Oswald, tahoma;
+  }
 
   .logo {
     max-height: 20%;
     max-width: 20%;
     padding: auto;
-    margin: auto; }
+    margin: auto;
+  }
 
   .gif-alex {
     height: 30%;
-    width: 30%; }
+    width: 30%;
+  }
 
   .capa {
     display: none !important;
-    opacity: 0; }
+    opacity: 0;
+  }
 
   .flex {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; }
-    .flex .flex-coluna {
-      width: 50%;
-      margin: 20px;
-      padding: 20px;
-      box-shadow: 0 0 20px #a1a1a1;
-      text-align: center;
-      font: 20px tahoma, verdana; }
-      .flex .flex-coluna img {
-        max-width: 100%;
-        max-height: 100%; }
+    justify-content: center;
+  }
+  .flex .flex-coluna {
+    width: 50%;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 0 20px #a1a1a1;
+    text-align: center;
+    font: 20px tahoma, verdana;
+  }
+  .flex .flex-coluna img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 
   .jogocentro {
     display: none !important;
-    opacity: 0; }
+    opacity: 0;
+  }
 
   .gif-alex {
-    display: none !important; }
+    display: none !important;
+  }
 
   .botao-jogo {
-    display: none !important; }
+    display: none !important;
+  }
 
   .logocybertech {
     height: 15%;
     width: 15%;
-    margin-bottom: -3%; } }
+    margin-bottom: -3%;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */

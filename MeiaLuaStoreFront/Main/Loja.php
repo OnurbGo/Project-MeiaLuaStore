@@ -13,25 +13,58 @@ try {
 }
 
 $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : 'Todos';
-
-$produtos = [];
+$produtosCarrossel = [];
+$produtosCaixas = [];
 
 if ($categoria != 'Todos') {
-    $query = $pdo->prepare("CALL buscar_por_categoria(:categoria)");
-    $query->execute(['categoria' => $categoria]);
-    $produtos = $query->fetchAll(PDO::FETCH_ASSOC);
+    $queryCarrossel = $pdo->prepare("CALL produtos_mais_vendidos_por_categoria(:categoria)");
+    $queryCarrossel->execute(['categoria' => $categoria]);
+    $produtosCarrossel = $queryCarrossel->fetchAll(PDO::FETCH_ASSOC);
+    $queryCarrossel->closeCursor();
 } else {
-    $query = $pdo->query("SELECT 
-        p.id_produto, p.nome_produto, i.url AS url_imagem
-        FROM produto p
-        LEFT JOIN imagens i ON p.id_produto = i.id_produto");
-    $produtos = $query->fetchAll(PDO::FETCH_ASSOC);
+    $queryCarrossel = $pdo->query("CALL produtos_mais_vendidos_por_categoria('Todos')");
+    $produtosCarrossel = $queryCarrossel->fetchAll(PDO::FETCH_ASSOC);
+    $queryCarrossel->closeCursor();
 }
 
-if (empty($produtos)) {
-    $produtos = null;
+if ($categoria != 'Todos') {
+    $queryCaixas = $pdo->prepare("SELECT id_produto, nome_produto FROM produto WHERE categoria = :categoria");
+    $queryCaixas->execute(['categoria' => $categoria]);
+    $produtosCaixas = $queryCaixas->fetchAll(PDO::FETCH_ASSOC);
+    $queryCaixas->closeCursor();
+} else {
+    $queryCaixas = $pdo->query("SELECT id_produto, nome_produto FROM produto");
+    $produtosCaixas = $queryCaixas->fetchAll(PDO::FETCH_ASSOC);
+    $queryCaixas->closeCursor();
 }
 
+if (empty($produtosCarrossel)) {
+    $produtosCarrossel = null;
+}
+
+if (empty($produtosCaixas)) {
+    $produtosCaixas = null;
+}
+
+function buscarImagens($id_produto) {
+    $imagensApiUrl = "http://localhost:8080/imagens/produto/$id_produto";
+    $ch = curl_init($imagensApiUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPGET, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 30); 
+    $response = curl_exec($ch);
+    
+    if (curl_errno($ch)) {
+        echo 'Erro cURL (imagens): ' . curl_error($ch);
+        curl_close($ch);
+        return null;
+    }
+
+    $imagens = json_decode($response, true);
+    curl_close($ch);
+
+    return $imagens;
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,13 +84,16 @@ if (empty($produtos)) {
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <?php 
-        if (!empty($produtos)) {
+        if (!empty($produtosCarrossel)) {
             $first = true;
-            foreach ($produtos as $produto) { 
+            foreach ($produtosCarrossel as $produto) { 
                 $active = $first ? 'active' : '';
                 $first = false;
 
-                $url_imagem = !empty($produto['url_imagem']) ? $produto['url_imagem'] : 'Imagens/placeholder.jpg';                ?>
+                
+                $imagens = buscarImagens($produto['id_produto']);
+                $url_imagem = !empty($imagens) ? $imagens[0]['url'] : 'Imagens/placeholder.jpg'; 
+                ?>
                 <div class="carousel-item <?= $active ?>">
                     <a href="index.php?pg=Pg_Jogo.php&id=<?= $produto['id_produto'] ?>">
                         <img src="<?= $url_imagem ?>" class="d-block w-100" alt="<?= $produto['nome_produto'] ?>">
@@ -68,10 +104,10 @@ if (empty($produtos)) {
                 </div>
             <?php }
         } else {
-            echo "<p></p>";
+            echo "<p>Nenhum produto encontrado.</p>";
         }
         ?>
-    </div>
+    </div>  
 
     <!-- Controles do Carrossel -->
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -91,7 +127,7 @@ if (empty($produtos)) {
         <h1>Jogos: <?= htmlspecialchars($categoria) ?></h1>
         <!-- Formulário de Filtro de Categoria -->
         <form action="index.php" method="get">
-          <input type="hidden" name="pg" value="loja"> <!-- Adiciona o parâmetro 'pg=loja' -->
+          <input type="hidden" name="pg" value="loja">
           <div class="form-group">
             <label for="categoria">Filtrar por Categoria:</label>
             <select class="form-select" id="categoria" name="categoria" onchange="this.form.submit()">
@@ -108,13 +144,14 @@ if (empty($produtos)) {
       </div>
     </div>
 
-
-    <!-- Exibição dos Produtos nas "Caixinhas" com as suas classes -->
+    <!-- Exibição dos Produtos nas "Caixinhas" -->
     <div class="flex mt-4">
         <?php 
-        if ($produtos !== null) {
-            foreach ($produtos as $produto) { 
-                $url_imagem = !empty($produto['url_imagem']) ? $produto['url_imagem'] : 'Imagens/placeholder.jpg';
+        if ($produtosCaixas !== null) {
+            foreach ($produtosCaixas as $produto) { 
+                
+                $imagens = buscarImagens($produto['id_produto']);
+                $url_imagem = !empty($imagens) ? $imagens[0]['url'] : 'Imagens/placeholder.jpg';
                 ?>
                 <div class="flex-coluna">
                     <a class="textoflex" href="index.php?pg=Pg_Jogo.php&id=<?= $produto['id_produto'] ?>">

@@ -50,7 +50,7 @@ public class Pedido {
 
     @JsonProperty("usuario")  // Exibe apenas o id_usuario
     public Integer getUsuarioId() {
-        return usuario != null ? usuario.getId_usuario() : null;  // Exibe o id_usuario
+        return usuario != null ? usuario.getId_usuario() : null;
     }
 
     public void setUsuario(Usuario usuario) {
