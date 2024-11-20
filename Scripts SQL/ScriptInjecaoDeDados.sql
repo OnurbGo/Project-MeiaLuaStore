@@ -42,4 +42,8 @@ END $$
 
 DELIMITER ;
 
+
 select * from pedido
+
+INSERT INTO produto_pedido (id_produto, id_pedido) 
+VALUES (7,8);

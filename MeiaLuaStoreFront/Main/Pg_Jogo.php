@@ -1,7 +1,6 @@
 <?php
-// Função para buscar os dados do produto usando a API do backend Java
 function buscarProduto($id_produto) {
-    $url = "http://localhost:8080/api/produtos/$id_produto"; // URL da API REST do produto
+    $url = "http://localhost:8080/api/produtos/$id_produto";
     $ch = curl_init($url);
 
     // Configuração da requisição cURL
@@ -22,9 +21,9 @@ function buscarProduto($id_produto) {
     return json_decode($response, true);
 }
 
-// Função para buscar as imagens do produto usando a API do backend Java
+// Função para buscar as imagens do produto
 function buscarImagens($id_produto) {
-    $url = "http://localhost:8080/imagens/produto/$id_produto"; // URL da API REST de imagens
+    $url = "http://localhost:8080/imagens/produto/$id_produto";
     $ch = curl_init($url);
 
     // Configuração da requisição cURL
@@ -63,9 +62,9 @@ if (isset($_GET['id'])) {
     // Buscar imagens do produto
     $imagens = buscarImagens($produtoId);
     if ($imagens && count($imagens) > 0) {
-        $url_imagem = $imagens[0]['url'];  // Pega a primeira imagem
+        $url_imagem = $imagens[0]['url']; 
     } else {
-        $url_imagem = 'default.jpg';  // Imagem padrão caso não haja imagens
+        $url_imagem = 'default.jpg'; 
     }
 } else {
     echo "Produto não encontrado.";
