@@ -14,15 +14,17 @@ import java.util.List;
 @RequestMapping("/api/produtos")
 public class ProdutoController {
 
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private ProdutoRepository repository;
 
+    /*metodo de trazer todas as informações*/
     @GetMapping
     public ResponseEntity<List<Produto>> findAll() {
         List<Produto> produtos = repository.findAll();
         return ResponseEntity.ok(produtos);
     }
 
+    /*trazer informações passando um parametro de busca*/
     @GetMapping("/{id}")
     public ResponseEntity<Produto> findById(@PathVariable Integer id) {
         Produto produto = repository.findById(id)
@@ -30,6 +32,7 @@ public class ProdutoController {
         return ResponseEntity.ok(produto);
     }
 
+    /*metodo para postar um novo produto*/
     @PostMapping
     public ResponseEntity<Produto> save(@RequestBody ProdutoRequestDTO dto) {
         try {
@@ -55,6 +58,7 @@ public class ProdutoController {
         }
     }
 
+    /*metodo de deletar informação passando um parametro*/
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         Produto produto = repository.findById(id)
@@ -64,6 +68,7 @@ public class ProdutoController {
         return ResponseEntity.noContent().build();
     }
 
+    /*metodo de atualizar o preço passando o id do produto e o novo preços*/
     @PutMapping("/{id_produto}/preco")
     public String atualizarPrecoProduto(@PathVariable Integer id_produto, @RequestParam Double novoPreco) {
         Produto produto = repository.findById(id_produto)

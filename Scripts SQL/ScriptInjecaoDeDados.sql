@@ -37,13 +37,18 @@ VALUES ('A vista'),('A prazo');
 INSERT INTO pagamento (metodo_pagamento,data_pagamento,valor_pago)
 values ('Pix',NOW(),250);
 
+INSERT INTO pedido (status, usuario_id, quantidade) 
+VALUES ('APROVADO',6,98);
+
+INSERT INTO produto_pedido (id_produto, id_pedido) 
+VALUES (9,9);
+
+INSERT INTO produto_pedido (id_produto, id_pedido) 
+VALUES (7,8);
+
+insert into imagens (url,id_produto) values ('https://assetsio.gnwcdn.com/eurogamer-zjp1vx.jpg?width=1200&height=630&fit=crop&enable=upscale&auto=webp',9);
+
 insert into imagens (url,id_produto) values ('https://images6.alphacoders.com/124/thumb-1920-1243578.jpg',1);
 END $$
 
 DELIMITER ;
-
-
-select * from pedido
-
-INSERT INTO produto_pedido (id_produto, id_pedido) 
-VALUES (7,8);

@@ -18,18 +18,20 @@ import java.util.Optional;
 @RequestMapping("/api/pedidos")
 public class PedidoController {
 
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private PedidoRepository repository;
 
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private UsuarioRepository usuarioRepository;
 
+    /*metodo de trazer todas as informações*/
     @GetMapping
     public ResponseEntity<List<Pedido>> findAll() {
         List<Pedido> pedidos = repository.findAll();
         return ResponseEntity.ok(pedidos);
     }
 
+    /*trazer informações passando um parametro de busca*/
     @GetMapping("/{id}")
     public ResponseEntity<Pedido> findById(@PathVariable Integer id) {
         return repository.findById(id)
@@ -37,6 +39,7 @@ public class PedidoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /*metodo para postar um novo pedido*/
     @PostMapping
     public ResponseEntity<?> save(@RequestBody PedidoRequestDTO pedidoRequestDTO) {
         // validação qunatidade
@@ -73,7 +76,7 @@ public class PedidoController {
         return ResponseEntity.ok(savedPedido);
     }
 
-
+    /*metodo deletar pedido passando um parametro*/
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Integer id) {
         return repository.findById(id)

@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface ImagemRepository extends JpaRepository<Imagem, Integer> {
     @Query("SELECT i FROM Imagem i WHERE i.produto.id_produto = :id_produto")
+    /*busca imagem com o parametro do id do produto*/
     List<Imagem> findByProduto_Id_produto(@Param("id_produto") Integer id_produto);
 }

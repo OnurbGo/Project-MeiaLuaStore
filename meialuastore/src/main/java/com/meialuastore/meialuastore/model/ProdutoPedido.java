@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "produto_pedido")
-@IdClass(ProdutoPedidoId.class)
+@IdClass(ProdutoPedidoId.class) /*usada para definir chaves primárias compostas*/
 public class ProdutoPedido {
 
     @Id

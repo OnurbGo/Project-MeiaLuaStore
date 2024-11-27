@@ -26,7 +26,7 @@ public class Usuario {
     private String cpf;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    @JsonIgnore // JAMAIS REMOVER, concerta problema de loop
+    @JsonIgnore // JAMAIS REMOVER, concerta problema de loop,  ignorar um campo.
     private List<Pedido> pedidos;
 
     public Integer getId_usuario() {

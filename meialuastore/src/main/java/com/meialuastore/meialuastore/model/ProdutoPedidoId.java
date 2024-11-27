@@ -3,7 +3,7 @@ package com.meialuastore.meialuastore.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class ProdutoPedidoId implements Serializable {
+public class ProdutoPedidoId implements Serializable /*usar para o fluxo de dados*/ {
 
     private Integer pedido;
     private Integer produto;

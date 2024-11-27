@@ -24,7 +24,10 @@ public class ProdutoPedidoRequestDTO {
         this.id_produto = id_produto;
     }
 
-    @Override
+    @Override /*sobrescrevendo um metodo da superclasse*/
+    /*ira verificar verificando se o objeto atual é igual ao
+    objeto passado como parâmetro, comparando os campos id_pedido e id_produto
+    serve pra comparar dois objetos*/
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -33,7 +36,9 @@ public class ProdutoPedidoRequestDTO {
                 Objects.equals(id_produto, that.id_produto);
     }
 
-    @Override
+    @Override /*sobrescrevendo um metodo da superclasse*/
+    /*gera um código único para o objeto com base nos valores
+    de id_pedido e id_produto*/
     public int hashCode() {
         return Objects.hash(id_pedido, id_produto);
     }

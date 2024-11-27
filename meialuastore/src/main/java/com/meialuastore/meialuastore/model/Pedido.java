@@ -20,7 +20,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    @JsonBackReference // JAMAIS REMOVER, resolve problema de loop
+    @JsonBackReference /*Evitar que aconteça o StackOverflowError (serializações infinitas)*/
     private Usuario usuario;
 
     @Column(name = "data_pedido")
@@ -28,6 +28,10 @@ public class Pedido {
 
     @Column(name = "status")
     private String status;
+
+    /*cascade: é usado para propagar operações realizadas em uma entidade
+    principal para entidades relacionadas ele é configurado nas anotações de relacionamento,
+    como @OneToMany, @OneToOne*/
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -48,7 +52,8 @@ public class Pedido {
         return usuario;
     }
 
-    @JsonProperty("usuario")  // Exibe apenas o id_usuario
+    @JsonProperty("usuario")  /* Exibe apenas o id_usuario */
+    /*@JsonProperty personaliza como os campos de uma classe Java são mapeados para o JSON.*/
     public Integer getUsuarioId() {
         return usuario != null ? usuario.getId_usuario() : null;
     }

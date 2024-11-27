@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface ProdutoPedidoRepository extends JpaRepository<ProdutoPedido, ProdutoPedidoId> {
-
     @Query("SELECT pp FROM ProdutoPedido pp WHERE pp.pedido.id_pedido = :idPedido AND pp.produto.id_produto = :idProduto")
+    /*buscar um ProdutoPedido com base no id_pedido e id_produto*/
     Optional<ProdutoPedido> findByPedidoIdAndProdutoId(@Param("idPedido") Integer idPedido, @Param("idProduto") Integer idProduto);
 }

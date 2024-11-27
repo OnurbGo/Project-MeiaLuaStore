@@ -39,5 +39,6 @@ DELIMITER ;
 call produtos_mais_vendidos_por_categoria('Luta');
 call produtos_mais_vendidos_por_categoria('todos');
 
+select * from pedido p 
 
 

@@ -20,20 +20,22 @@ import java.util.Optional;
 @RequestMapping("/pagamento")
 public class PagamentoController {
 
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private PagamentoRepository pagamentoRepository;
 
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private PedidoRepository pedidoRepository;
 
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private FormaPagamentoRepository formaPagamentoRepository;
 
+    /*trazer todas as informações*/
     @GetMapping
     public List<Pagamento> getAll() {
         return pagamentoRepository.findAll();
     }
 
+    /*trazer informações passando um parametro de busca*/
     @GetMapping("/{id}")
     public ResponseEntity<Pagamento> getById(@PathVariable int id) {
         return pagamentoRepository.findById(id)
@@ -41,6 +43,7 @@ public class PagamentoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /*metodo para postar um novo pagamento*/
     @PostMapping
     public ResponseEntity<Pagamento> create(@RequestBody PagamentoRequestDTO pagamentoDTO) {
         Optional<Pedido> pedidoOptional = pedidoRepository.findById(pagamentoDTO.getPedidoId());
@@ -60,6 +63,7 @@ public class PagamentoController {
         return ResponseEntity.ok(savedPagamento);
     }
 
+    /*deletar informação passando um parametro*/
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         Pagamento pagamento = pagamentoRepository.findById(id)

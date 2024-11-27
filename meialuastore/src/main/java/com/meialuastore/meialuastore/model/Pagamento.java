@@ -18,9 +18,9 @@ public class Pagamento {
     @JsonBackReference
     private Pedido pedido;
 
-    @ManyToOne
-    @JoinColumn(name = "id_forma_pagamento")
-    @JsonBackReference
+    @ManyToOne /*cardindalidade*/
+    @JoinColumn(name = "id_forma_pagamento") /*JPA é usada para definir a coluna de junção (ou chave estrangeira)*/
+    @JsonBackReference /*Evitar que aconteça o StackOverflowError (serializações infinitas)*/
     private FormaPagamento formaPagamento;
 
     private LocalDateTime dataPagamento;

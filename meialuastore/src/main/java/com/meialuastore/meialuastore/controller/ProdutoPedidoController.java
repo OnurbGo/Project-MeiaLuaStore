@@ -18,16 +18,16 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/produto-pedido")
 public class ProdutoPedidoController {
 
-
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private ProdutoPedidoRepository produtoPedidoRepository;
 
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private PedidoRepository pedidoRepository;
 
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private ProdutoRepository produtoRepository;
 
+    /*trazer todas as informações*/
     @GetMapping
     public ResponseEntity<List<ProdutoPedidoRequestDTO>> findAll() {
         List<ProdutoPedidoRequestDTO> produtosPedidos = produtoPedidoRepository.findAll().stream()
@@ -36,6 +36,7 @@ public class ProdutoPedidoController {
         return ResponseEntity.ok(produtosPedidos);
     }
 
+    /*trazer informações passando um parametro de busca*/
     @GetMapping("/{idPedido}/{idProduto}")
     public ResponseEntity<ProdutoPedidoRequestDTO> findById(
             @PathVariable Integer idPedido, @PathVariable Integer idProduto) {
@@ -43,6 +44,11 @@ public class ProdutoPedidoController {
                 .map(produtoPedido -> ResponseEntity.ok(convertToDTO(produtoPedido)))
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    /*A principal função do DTO em meu codigo é representar de maneira
+    simplificada os dados que serão enviados ou recebidos em uma requisição
+    HTTP, desacoplando a lógica interna e as entidades do banco de dados
+    da API exposta ao cliente.*/
 
     private ProdutoPedidoRequestDTO convertToDTO(ProdutoPedido produtoPedido) {
         ProdutoPedidoRequestDTO dto = new ProdutoPedidoRequestDTO();

@@ -6,6 +6,10 @@ import jakarta.validation.constraints.Positive;
 
 public class ProdutoRequestDTO {
 
+    /*@NotNull e @NotBlank usado para evitar valores vazios */
+    /*@Positive evitar que o valor seja negativo*/
+
+
     @NotBlank(message = "O nome do produto é obrigatório.")
     private String nome;
 
@@ -18,6 +22,8 @@ public class ProdutoRequestDTO {
 
     @NotBlank(message = "A categoria do produto é obrigatória.")
     private String categoria;
+
+    /*encapsulamento com verificação se esta vazio, se é nullo ou se é positivo*/
 
     public @NotBlank(message = "O nome do produto é obrigatório.") String getNome() {
         return nome;

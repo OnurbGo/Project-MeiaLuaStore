@@ -12,14 +12,16 @@ import java.util.List;
 @RequestMapping("/forma-pagamento")
 public class FormaPagamentoController {
 
-    @Autowired
+    @Autowired /*injeção automática de dependências*/
     private FormaPagamentoRepository formaPagamentoRepository;
 
+    /*trazer todas as informações */
     @GetMapping
     public List<FormaPagamento> getAll() {
         return formaPagamentoRepository.findAll();
     }
 
+    /*trazer informações passando um parametro de busca*/
     @GetMapping("/{id}")
     public ResponseEntity<FormaPagamento> getById(@PathVariable int id) {
         return formaPagamentoRepository.findById(id)
